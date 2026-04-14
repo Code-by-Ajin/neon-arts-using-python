@@ -1,0 +1,33 @@
+import turtle
+
+t = turtle.Turtle()
+s = turtle.Screen()
+s.bgcolor("black")
+t.speed(0)
+t.left(90)
+t.penup()
+t.goto(0, -200)
+t.pendown()
+t.hideturtle()
+
+def draw_tree(branch_len, t):
+    if branch_len > 5:
+        # Color changes based on branch length for a "neon glow" effect
+        if branch_len < 20:
+            t.color("#00FF00") # Bright Green leaves
+        elif branch_len < 50:
+            t.color("#32CD32")
+        else:
+            t.color("#ADFF2F") # Neon Yellow-Green trunk
+            
+        t.width(branch_len / 10)
+        t.forward(branch_len)
+        t.right(20)
+        draw_tree(branch_len - 15, t)
+        t.left(40)
+        draw_tree(branch_len - 15, t)
+        t.right(20)
+        t.backward(branch_len)
+
+draw_tree(100, t)
+turtle.done()
