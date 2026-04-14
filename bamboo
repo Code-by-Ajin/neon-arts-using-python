@@ -1,0 +1,53 @@
+import turtle
+import random
+import time
+
+# Basic Setup
+t = turtle.Turtle()
+s = turtle.Screen()
+s.bgcolor("black")
+t.hideturtle()
+
+# Speed 1 is the slowest movement animation
+t.speed(0) 
+
+def slow_bamboo(x, y, segments):
+    t.penup()
+    t.goto(x, y)
+    t.setheading(90 + random.randint(-2, 2))
+    t.pendown()
+    
+    for i in range(segments):
+        # Draw the main stalk segment (Dark Green)
+        t.width(10)
+        t.pencolor("#004400")
+        t.forward(30)
+        
+        # Pause slightly to show "growth"
+        time.sleep(0.05)
+        
+        # Draw the neon node (The glowing ring)
+        t.width(12)
+        t.pencolor("#39FF14") 
+        t.forward(5)
+        
+        # Add a random glowing leaf branch
+        if random.random() > 0.6:
+            current_pos = t.pos()
+            current_head = t.heading()
+            t.right(random.randint(30, 60))
+            t.width(2)
+            t.pencolor("#00FF7F")
+            t.forward(20)
+            t.circle(5, 180) # Tiny leaf curve
+            t.penup()
+            t.goto(current_pos)
+            t.setheading(current_head)
+            t.pendown()
+
+# This will draw 5 stalks slowly
+positions = [-200, -100, 0, 100, 200]
+for pos in positions:
+    slow_bamboo(pos, -250, random.randint(8, 12))
+
+turtle.done()
